@@ -36,15 +36,15 @@ class CraftMineBot:
         
         @self.bot.event
         async def on_ready():
-            print(f"🤖 Bot connecté en tant que {self.bot.user}")
-            print(f"📊 Serveur surveillé : {self.config.server_address}")
+            print(f"Bot connecté en tant que {self.bot.user}")
+            print(f"Serveur surveillé : {self.config.server_address}")
             
             # Synchroniser les slash commands
             try:
                 synced = await self.bot.tree.sync()
-                print(f"✅ {len(synced)} slash commands synchronisées")
+                print(f"{len(synced)} slash commands synchronisées")
             except Exception as e:
-                print(f"❌ Erreur lors de la synchronisation des slash commands : {e}")
+                print(f"Erreur lors de la synchronisation des slash commands : {e}")
             
             # Démarrer la tâche de mise à jour du statut
             if not self.update_status.is_running():
@@ -56,12 +56,12 @@ class CraftMineBot:
             if isinstance(error, commands.CommandNotFound):
                 return  # Ignorer les commandes inconnues
             elif isinstance(error, commands.CheckFailure):
-                await ctx.send("❌ Vous n'avez pas la permission d'utiliser cette commande.")
+                await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
             elif isinstance(error, commands.MissingRequiredArgument):
-                await ctx.send(f"❌ Argument manquant : `{error.param.name}`")
+                await ctx.send(f"Argument manquant : `{error.param.name}`")
             else:
                 print(f"Erreur de commande : {error}")
-                await ctx.send("❌ Une erreur est survenue lors de l'exécution de la commande.")
+                await ctx.send("Une erreur est survenue lors de l'exécution de la commande.")
     
     @tasks.loop(seconds=30)
     async def update_status(self):
@@ -101,9 +101,9 @@ class CraftMineBot:
             from commands.slash_admin import setup as setup_slash_admin
             await setup_slash_admin(self.bot, self.config)
             
-            print("✅ Commandes traditionnelles et slash commands chargées avec succès")
+            print("Commandes traditionnelles et slash commands chargées avec succès")
         except Exception as e:
-            print(f"❌ Erreur lors du chargement des commandes : {e}")
+            print(f"Erreur lors du chargement des commandes : {e}")
     
     @update_status.before_loop
     async def before_update_status(self):
@@ -113,7 +113,7 @@ class CraftMineBot:
     async def start(self):
         """Démarre le bot"""
         if not self.config.token:
-            print("❌ ERREUR : Token Discord manquant!")
+            print("ERREUR : Token Discord manquant!")
             print("Vérifiez que la variable DISCORD_TOKEN est définie dans votre fichier .env")
             return
         
@@ -122,22 +122,22 @@ class CraftMineBot:
             await self.load_commands()
             
             # Démarrer le bot
-            print("🔗 Tentative de connexion à Discord...")
+            print("Tentative de connexion à Discord...")
             await self.bot.start(self.config.token)
         except discord.LoginFailure:
-            print("❌ ERREUR : Token Discord invalide!")
+            print("ERREUR : Token Discord invalide!")
             print("Vérifiez votre token sur https://discord.com/developers/applications")
         except discord.PrivilegedIntentsRequired:
-            print("❌ ERREUR : Intents privilégiés requis!")
+            print("ERREUR : Intents privilégiés requis!")
             print("Activez les intents sur le portail Discord Developer")
         except Exception as e:
             error_code = getattr(e, 'code', 'Inconnue')
-            print(f"❌ Erreur lors du démarrage : {e}")
+            print(f"Erreur lors du démarrage : {e}")
             if str(error_code) == '4004':
-                print("💡 Solution : Vérifiez que votre token est valide et que le bot n'est pas déjà en cours d'exécution")
+                print("Solution : Vérifiez que votre token est valide et que le bot n'est pas déjà en cours d'exécution")
             elif str(error_code) == '4014':
-                print("💡 Solution : Activez les intents privilégiés sur le portail Discord")
-            print(f"📋 Code d'erreur : {error_code}")
+                print("Solution : Activez les intents privilégiés sur le portail Discord")
+            print(f"Code d'erreur : {error_code}")
     
     def run(self):
         """Lance le bot (version synchrone)"""
@@ -145,9 +145,9 @@ class CraftMineBot:
         try:
             asyncio.run(self.start())
         except KeyboardInterrupt:
-            print("\n🛑 Arrêt du bot...")
+            print("\nArrêt du bot...")
         except Exception as e:
-            print(f"❌ Erreur fatale : {e}")
+            print(f"Erreur fatale : {e}")
 
 if __name__ == "__main__":
     bot = CraftMineBot()

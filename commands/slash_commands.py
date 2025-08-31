@@ -24,13 +24,13 @@ class SlashCommands(commands.Cog):
     @app_commands.command(name="ip", description="Affiche l'adresse IP du serveur Minecraft")
     async def ip(self, interaction: discord.Interaction):
         """Slash command pour afficher l'IP du serveur"""
-        await interaction.response.send_message(f"🌐 IP du serveur : `{self.config.server_address}`")
+        await interaction.response.send_message(f"IP du serveur : `{self.config.server_address}`")
     
     @app_commands.command(name="version", description="Affiche la version Minecraft configurée")
     async def version(self, interaction: discord.Interaction):
         """Slash command pour afficher la version"""
         version = self.config.get("minecraft_version")
-        await interaction.response.send_message(f"⚙️ Version Minecraft définie : `{version}`")
+        await interaction.response.send_message(f"Version Minecraft définie : `{version}`")
     
     @app_commands.command(name="joueurs", description="Affiche la liste des joueurs connectés")
     async def joueurs(self, interaction: discord.Interaction):
@@ -45,29 +45,29 @@ class SlashCommands(commands.Cog):
     async def aide(self, interaction: discord.Interaction):
         """Slash command pour l'aide"""
         embed = discord.Embed(
-            title="🤖 CraftMine Bot - Commandes disponibles",
+            title="CraftMine Bot - Commandes disponibles",
             color=discord.Color.blue()
         )
         
         embed.add_field(
-            name="📊 Surveillance du serveur",
+            name="Surveillance du serveur",
             value="• `/status` - État du serveur et nombre de joueurs\n• `/joueurs` - Liste des joueurs connectés",
             inline=False
         )
         
         embed.add_field(
-            name="ℹ️ Informations",
+            name="Informations",
             value="• `/ip` - Adresse IP du serveur\n• `/version` - Version Minecraft\n• `/aide` - Affiche cette aide",
             inline=False
         )
         
         embed.add_field(
-            name="⚙️ Administration",
+            name="Administration",
             value="• `/parametres` - Configuration (admin uniquement)",
             inline=False
         )
         
-        embed.set_footer(text="🔄 Le statut est mis à jour automatiquement toutes les 30 secondes")
+        embed.set_footer(text="Le statut est mis à jour automatiquement toutes les 30 secondes")
         
         await interaction.response.send_message(embed=embed)
 

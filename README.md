@@ -2,7 +2,7 @@
 
 Bot Discord pour surveiller le statut de votre serveur Minecraft.
 
-## � Installation
+## Installation
 
 1. **Installer les dépendances**
    ```bash
@@ -19,7 +19,7 @@ Bot Discord pour surveiller le statut de votre serveur Minecraft.
    ```
    Ou utilisez `start_bot.bat` sur Windows
 
-## 📋 Commandes
+## Commandes
 
 ### Slash Commands (recommandé)
 - `/status` - État du serveur et nombre de joueurs
@@ -33,7 +33,7 @@ Bot Discord pour surveiller le statut de votre serveur Minecraft.
 - `!status`, `!joueurs`, `!ip`, `!version`, `!aide`
 - `!parametres` - Configuration admin
 
-## ⚙️ Configuration
+## Configuration
 
 Le bot crée automatiquement un fichier `config.json` avec les paramètres du serveur Minecraft. Ces paramètres peuvent être modifiés via les commandes admin.
 
@@ -45,10 +45,10 @@ DEFAULT_SERVER_PORT=25565
 DEFAULT_MINECRAFT_VERSION=1.20.1
 ```
 
-## 🔧 Fonctionnalités
+## Fonctionnalités
 
-- ✅ Surveillance automatique toutes les 30 secondes
-- ✅ Statut Discord en temps réel
-- ✅ Slash commands modernes
-- ✅ Configuration persistante
-- ✅ Gestion d'erreurs robuste
+- Surveillance automatique toutes les 30 secondes
+- Statut Discord en temps réel
+- Slash commands modernes
+- Configuration persistante
+- Gestion d'erreurs robuste

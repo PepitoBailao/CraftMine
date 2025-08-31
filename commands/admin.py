@@ -16,11 +16,11 @@ class AdminCommands(commands.Cog):
     async def parametres(self, ctx):
         """Affiche les paramètres actuels"""
         embed_content = (
-            f"⚙️ **Configuration actuelle :**\n"
+            f"**Configuration actuelle :**\n"
             f"• **IP :** `{self.config.get('server_ip')}`\n"
             f"• **Port :** `{self.config.get('server_port')}`\n"
             f"• **Version :** `{self.config.get('minecraft_version')}`\n\n"
-            f"**📝 Commandes disponibles :**\n"
+            f"**Commandes disponibles :**\n"
             f"• `!parametres setip <ip> [port]` - Changer l'adresse\n"
             f"• `!parametres setversion <version>` - Changer la version\n"
             f"• `!parametres reload` - Recharger la config\n"
@@ -34,21 +34,21 @@ class AdminCommands(commands.Cog):
         """Changer l'IP et le port du serveur"""
         self.config.set("server_ip", ip)
         self.config.set("server_port", port)
-        await ctx.send(f"✅ Adresse mise à jour : `{ip}:{port}`")
+        await ctx.send(f"Adresse mise à jour : `{ip}:{port}`")
     
     @parametres.command(name="setversion")
     @is_admin(admin_ids=[448420884059914240])
     async def set_version(self, ctx, version: str):
         """Changer la version affichée"""
         self.config.set("minecraft_version", version)
-        await ctx.send(f"✅ Version Minecraft mise à jour : `{version}`")
+        await ctx.send(f"Version Minecraft mise à jour : `{version}`")
     
     @parametres.command(name="reload")
     @is_admin(admin_ids=[448420884059914240])
     async def reload_config(self, ctx):
         """Recharge la configuration depuis le fichier"""
         self.config.load_config()
-        await ctx.send("🔄 Configuration rechargée depuis le fichier.")
+        await ctx.send("Configuration rechargée depuis le fichier.")
     
     @parametres.command(name="test")
     @is_admin(admin_ids=[448420884059914240])
@@ -61,14 +61,14 @@ class AdminCommands(commands.Cog):
         
         if status["online"]:
             await ctx.send(
-                f"✅ **Test de connexion réussi !**\n"
+                f"**Test de connexion réussi !**\n"
                 f"• Serveur en ligne\n"
                 f"• Joueurs : {status['players_online']}/{status['players_max']}\n"
                 f"• Latence : {status['latency']:.2f}ms"
             )
         else:
             await ctx.send(
-                f"❌ **Échec de connexion**\n"
+                f"**Échec de connexion**\n"
                 f"• Erreur : `{status.get('error', 'Inconnue')}`\n"
                 f"• Vérifiez l'IP et le port dans la configuration"
             )

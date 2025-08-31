@@ -56,17 +56,17 @@ class MinecraftServerManager:
     def format_status_message(self, status: Dict[str, Any]) -> str:
         """Formate le message de statut pour Discord"""
         if status["online"]:
-            return f"🟢 Serveur en ligne : {status['players_online']}/{status['players_max']} joueurs"
+            return f"Serveur en ligne : {status['players_online']}/{status['players_max']} joueurs"
         else:
-            return f"🔴 Serveur hors ligne ou injoignable"
+            return f"Serveur hors ligne ou injoignable"
     
     def format_players_message(self, players_data: Dict[str, Any]) -> str:
         """Formate la liste des joueurs pour Discord"""
         if not players_data["success"]:
-            return f"❌ Impossible de récupérer la liste des joueurs.\nErreur : `{players_data['error']}`"
+            return f"Impossible de récupérer la liste des joueurs.\nErreur : `{players_data['error']}`"
         
         if players_data["count"] == 0:
-            return "😴 Aucun joueur connecté pour l'instant."
+            return "Aucun joueur connecté pour l'instant."
         
         players_list = ", ".join(players_data["players"])
-        return f"👥 Joueurs connectés ({players_data['count']}) : {players_list}"
+        return f"Joueurs connectés ({players_data['count']}) : {players_list}"

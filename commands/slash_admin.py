@@ -39,12 +39,12 @@ class SlashAdminCommands(commands.Cog):
         
         # Vérification des permissions
         if not self.is_admin(interaction.user.id):
-            await interaction.response.send_message("❌ Vous n'avez pas la permission d'utiliser cette commande.", ephemeral=True)
+            await interaction.response.send_message("Vous n'avez pas la permission d'utiliser cette commande.", ephemeral=True)
             return
         
         if action.value == "show":
             embed = discord.Embed(
-                title="⚙️ Configuration actuelle",
+                title="Configuration actuelle",
                 color=discord.Color.green()
             )
             embed.add_field(name="IP", value=f"`{self.config.get('server_ip')}`", inline=True)
@@ -52,7 +52,7 @@ class SlashAdminCommands(commands.Cog):
             embed.add_field(name="Version", value=f"`{self.config.get('minecraft_version')}`", inline=True)
             
             embed.add_field(
-                name="📝 Actions disponibles",
+                name="Actions disponibles",
                 value="Utilisez `/parametres` avec les différentes actions pour modifier la configuration",
                 inline=False
             )
@@ -61,24 +61,24 @@ class SlashAdminCommands(commands.Cog):
         
         elif action.value == "setip":
             if not ip:
-                await interaction.response.send_message("❌ Vous devez spécifier une adresse IP.", ephemeral=True)
+                await interaction.response.send_message("Vous devez spécifier une adresse IP.", ephemeral=True)
                 return
             
             self.config.set("server_ip", ip)
             self.config.set("server_port", port)
-            await interaction.response.send_message(f"✅ Adresse mise à jour : `{ip}:{port}`", ephemeral=True)
+            await interaction.response.send_message(f"Adresse mise à jour : `{ip}:{port}`", ephemeral=True)
         
         elif action.value == "setversion":
             if not version:
-                await interaction.response.send_message("❌ Vous devez spécifier une version.", ephemeral=True)
+                await interaction.response.send_message("Vous devez spécifier une version.", ephemeral=True)
                 return
             
             self.config.set("minecraft_version", version)
-            await interaction.response.send_message(f"✅ Version Minecraft mise à jour : `{version}`", ephemeral=True)
+            await interaction.response.send_message(f"Version Minecraft mise à jour : `{version}`", ephemeral=True)
         
         elif action.value == "reload":
             self.config.load_config()
-            await interaction.response.send_message("🔄 Configuration rechargée depuis le fichier.", ephemeral=True)
+            await interaction.response.send_message("Configuration rechargée depuis le fichier.", ephemeral=True)
         
         elif action.value == "test":
             await interaction.response.defer(ephemeral=True)
@@ -89,7 +89,7 @@ class SlashAdminCommands(commands.Cog):
             
             if status["online"]:
                 embed = discord.Embed(
-                    title="✅ Test de connexion réussi !",
+                    title="Test de connexion réussi !",
                     color=discord.Color.green()
                 )
                 embed.add_field(name="Statut", value="Serveur en ligne", inline=True)
@@ -97,7 +97,7 @@ class SlashAdminCommands(commands.Cog):
                 embed.add_field(name="Latence", value=f"{status['latency']:.2f}ms", inline=True)
             else:
                 embed = discord.Embed(
-                    title="❌ Échec de connexion",
+                    title="Échec de connexion",
                     color=discord.Color.red()
                 )
                 embed.add_field(name="Erreur", value=f"`{status.get('error', 'Inconnue')}`", inline=False)

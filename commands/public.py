@@ -20,13 +20,13 @@ class PublicCommands(commands.Cog):
     @commands.command()
     async def ip(self, ctx):
         """Affiche l'adresse IP du serveur"""
-        await ctx.send(f"🌐 IP du serveur : `{self.config.server_address}`")
+        await ctx.send(f"IP du serveur : `{self.config.server_address}`")
     
     @commands.command()
     async def version(self, ctx):
         """Affiche la version du serveur"""
         version = self.config.get("minecraft_version")
-        await ctx.send(f"⚙️ Version Minecraft définie : `{version}`")
+        await ctx.send(f"Version Minecraft définie : `{version}`")
     
     @commands.command()
     async def joueurs(self, ctx):
@@ -39,17 +39,17 @@ class PublicCommands(commands.Cog):
     async def aide(self, ctx):
         """Affiche l'aide des commandes disponibles"""
         embed_content = (
-            "🤖 **CraftMine Bot - Commandes disponibles**\n\n"
-            "**📊 Surveillance du serveur :**\n"
+            "**CraftMine Bot - Commandes disponibles**\n\n"
+            "**Surveillance du serveur :**\n"
             "• `!status` - État du serveur et nombre de joueurs\n"
             "• `!joueurs` - Liste des joueurs connectés\n\n"
-            "**ℹ️ Informations :**\n"
+            "**Informations :**\n"
             "• `!ip` - Adresse IP du serveur\n"
             "• `!version` - Version Minecraft\n"
             "• `!aide` - Affiche cette aide\n\n"
-            "**⚙️ Administration :**\n"
+            "**Administration :**\n"
             "• `!parametres` - Voir/modifier la configuration (admin uniquement)\n\n"
-            "🔄 *Le statut est mis à jour automatiquement toutes les 30 secondes*"
+            "*Le statut est mis à jour automatiquement toutes les 30 secondes*"
         )
         await ctx.send(embed_content)
 
