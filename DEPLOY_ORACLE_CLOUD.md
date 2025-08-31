@@ -1,15 +1,15 @@
 # Déploiement CraftMine Bot sur Oracle Cloud
 
-## 🌩️ Guide complet pour héberger sur Oracle Cloud VM
+## Guide complet pour héberger sur Oracle Cloud VM
 
-### 📋 Pré-requis
+### Pré-requis
 
-- ✅ VM Oracle Cloud (Always Free tier recommandé)
-- ✅ Ubuntu 20.04/22.04 LTS
-- ✅ Accès SSH à votre VM
-- ✅ Votre bot Discord configuré localement
+- VM Oracle Cloud (Always Free tier recommandé)
+- Ubuntu 20.04/22.04 LTS
+- Accès SSH à votre VM
+- Votre bot Discord configuré localement
 
-## 🚀 Étape 1 : Préparation de la VM Oracle Cloud
+## Étape 1 : Préparation de la VM Oracle Cloud
 
 ### Connexion SSH
 ```bash
@@ -30,7 +30,7 @@ sudo apt install python3.11 python3.11-venv python3.11-dev python3-pip git curl 
 python3.11 --version
 ```
 
-## 📦 Étape 2 : Déploiement du code
+## Étape 2 : Déploiement du code
 
 ### Cloner le projet
 ```bash
@@ -50,7 +50,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## ⚙️ Étape 3 : Configuration
+## Étape 3 : Configuration
 
 ### Créer le fichier .env
 ```bash
@@ -62,7 +62,7 @@ Configurez avec vos vraies valeurs :
 ```env
 DISCORD_TOKEN=votre_token_discord_ici
 ADMIN_USER_ID=votre_id_discord_ici
-DEFAULT_SERVER_IP=144.24.205.125
+DEFAULT_SERVER_IP=ip_server
 DEFAULT_SERVER_PORT=25565
 DEFAULT_MINECRAFT_VERSION=1.20.1
 ```
@@ -80,7 +80,7 @@ nano config.json
 }
 ```
 
-## 🔄 Étape 4 : Service systemd (Démarrage automatique)
+## Étape 4 : Service systemd (Démarrage automatique)
 
 ### Créer le service
 ```bash
@@ -124,7 +124,7 @@ sudo systemctl start craftmine-bot
 sudo systemctl status craftmine-bot
 ```
 
-## 📊 Étape 5 : Surveillance et logs
+## Étape 5 : Surveillance et logs
 
 ### Voir les logs en temps réel
 ```bash
@@ -146,7 +146,7 @@ sudo journalctl -u craftmine-bot --since "24 hours ago"
 sudo systemctl status craftmine-bot -l
 ```
 
-## 🔥 Étape 6 : Configuration du pare-feu Oracle Cloud
+## Étape 6 : Configuration du pare-feu Oracle Cloud
 
 ### Dans la console Oracle Cloud
 
@@ -164,7 +164,7 @@ Port: 22 (SSH - déjà ouvert normalement)
 
 **Note :** Le bot Discord n'a besoin d'aucun port entrant spécifique, seulement sortant vers Discord.
 
-## 🔧 Étape 7 : Mise à jour automatique
+## Étape 7 : Mise à jour automatique
 
 ### Script de mise à jour
 ```bash
@@ -191,7 +191,7 @@ chmod +x ~/update-craftmine.sh
 ~/update-craftmine.sh
 ```
 
-## 📈 Étape 8 : Monitoring (Optionnel)
+## Étape 8 : Monitoring (Optionnel)
 
 ### Script de surveillance
 ```bash
@@ -217,7 +217,7 @@ Ajouter :
 */5 * * * * /home/ubuntu/check-craftmine.sh
 ```
 
-## 🛡️ Étape 9 : Sécurité
+## Étape 9 : Sécurité
 
 ### Sauvegarder les configurations
 ```bash
@@ -235,7 +235,7 @@ sudo apt install unattended-upgrades -y
 sudo dpkg-reconfigure unattended-upgrades
 ```
 
-## 🎯 Étape 10 : Vérification finale
+## Étape 10 : Vérification finale
 
 ### Test du bot
 ```bash
@@ -249,7 +249,7 @@ sudo journalctl -u craftmine-bot -n 50
 # Utiliser /status ou !status
 ```
 
-## 📋 Commandes de maintenance rapide
+## Commandes de maintenance rapide
 
 ```bash
 # Statut du bot
@@ -274,16 +274,16 @@ free -h
 ps aux | grep python
 ```
 
-## 💰 Avantages Oracle Cloud Always Free
+## Avantages Oracle Cloud Always Free
 
-- ✅ **2 VMs AMD** : 1/8 OCPU, 1GB RAM chacune
-- ✅ **Gratuit à vie** : Pas de limite de temps
-- ✅ **Boot Volume** : 47GB de stockage
-- ✅ **Bande passante** : 10TB/mois
-- ✅ **IP publique** : Incluse
-- ✅ **Uptime** : Excellent (datacenter Oracle)
+- **2 VMs AMD** : 1/8 OCPU, 1GB RAM chacune
+- **Gratuit à vie** : Pas de limite de temps
+- **Boot Volume** : 47GB de stockage
+- **Bande passante** : 10TB/mois
+- **IP publique** : Incluse
+- **Uptime** : Excellent (datacenter Oracle)
 
-## 🆘 Dépannage
+## Dépannage
 
 ### Bot ne démarre pas
 ```bash
@@ -312,14 +312,14 @@ free -h
 sudo journalctl -f
 ```
 
-## 🎉 Résultat attendu
+## Résultat attendu
 
 Une fois terminé, votre bot sera :
-- ✅ **Toujours en ligne** (24/7)
-- ✅ **Redémarrage automatique** en cas de crash
-- ✅ **Mise à jour facile** avec git pull
-- ✅ **Logs centralisés** avec journalctl
-- ✅ **Gratuit à vie** sur Oracle Cloud
-- ✅ **Performances excellentes** pour un bot Discord
+- **Toujours en ligne** (24/7)
+- **Redémarrage automatique** en cas de crash
+- **Mise à jour facile** avec git pull
+- **Logs centralisés** avec journalctl
+- **Gratuit à vie** sur Oracle Cloud
+- **Performances excellentes** pour un bot Discord
 
 Votre bot CraftMine sera accessible dans Discord avec toutes ses fonctionnalités !

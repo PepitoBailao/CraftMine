@@ -1,13 +1,13 @@
 # CraftMine Oracle Cloud - Commandes Rapides
 
-## 🚀 Installation rapide
+## Installation rapide
 
 ```bash
 # Sur votre VM Oracle Cloud Ubuntu
 curl -sSL https://raw.githubusercontent.com/PepitoBailao/CraftMine/main/deploy-oracle.sh | bash
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ```bash
 # Éditer la configuration
@@ -20,7 +20,7 @@ sudo systemctl start craftmine-bot
 sudo systemctl status craftmine-bot
 ```
 
-## 📊 Surveillance
+## Surveillance
 
 ```bash
 # Logs en temps réel
@@ -33,7 +33,7 @@ sudo systemctl status craftmine-bot
 sudo systemctl restart craftmine-bot
 ```
 
-## 🔄 Mise à jour
+## Mise à jour
 
 ```bash
 # Script automatique
@@ -43,7 +43,7 @@ sudo systemctl restart craftmine-bot
 cd ~/CraftMine && git pull && sudo systemctl restart craftmine-bot
 ```
 
-## 🛠️ Dépannage
+## Dépannage
 
 ```bash
 # Tester manuellement
