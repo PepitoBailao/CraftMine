@@ -62,7 +62,7 @@ Configurez avec vos vraies valeurs :
 ```env
 DISCORD_TOKEN=votre_token_discord_ici
 ADMIN_USER_ID=votre_id_discord_ici
-DEFAULT_SERVER_IP=ip_server
+DEFAULT_SERVER_IP=votre_ip_serveur_minecraft
 DEFAULT_SERVER_PORT=25565
 DEFAULT_MINECRAFT_VERSION=1.20.1
 ```
@@ -74,7 +74,7 @@ nano config.json
 
 ```json
 {
-    "server_ip": "144.24.205.125",
+    "server_ip": "votre_ip_serveur_minecraft",
     "server_port": 25565,
     "minecraft_version": "1.20.1"
 }

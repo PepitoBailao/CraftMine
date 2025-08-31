@@ -17,7 +17,7 @@ class SlashAdminCommands(commands.Cog):
     @app_commands.describe(
         action="Action à effectuer",
         ip="Nouvelle adresse IP du serveur",
-        port="Nouveau port du serveur (défaut: 25565)",
+        port="Nouveau port du serveur (défaut: port_par_defaut)",
         version="Nouvelle version Minecraft"
     )
     @app_commands.choices(action=[

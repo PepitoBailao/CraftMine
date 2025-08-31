@@ -49,18 +49,27 @@ source .venv/bin/activate
 echo "Installation des dépendances Python..."
 pip install -r requirements.txt
 
-# Créer le fichier .env depuis l'exemple
+# Créer les fichiers de configuration depuis les exemples
 if [ ! -f ".env" ]; then
     echo "Création du fichier .env..."
     cp .env.example .env
     echo ""
     echo "IMPORTANT: Vous devez maintenant éditer le fichier .env"
-    echo "   Commande: nano ~/.CraftMine/.env"
+    echo "   Commande: nano ~/CraftMine/.env"
     echo ""
     echo "   Configurez ces variables:"
     echo "   - DISCORD_TOKEN=votre_token_discord"
     echo "   - ADMIN_USER_ID=votre_id_discord"
     echo "   - DEFAULT_SERVER_IP=votre_ip_minecraft"
+    echo ""
+fi
+
+if [ ! -f "config.json" ]; then
+    echo "Création du fichier config.json..."
+    cp config.json.example config.json
+    echo ""
+    echo "IMPORTANT: Vous devez aussi éditer config.json"
+    echo "   Commande: nano ~/CraftMine/config.json"
     echo ""
 fi
 

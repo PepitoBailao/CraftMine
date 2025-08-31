@@ -36,7 +36,7 @@ cp .env.example .env
 ```env
 DISCORD_TOKEN=votre_token_discord
 ADMIN_USER_ID=votre_id_discord
-DEFAULT_SERVER_IP=ip_de_votre_serveur
+DEFAULT_SERVER_IP=votre_ip_serveur_minecraft
 DEFAULT_SERVER_PORT=25565
 DEFAULT_MINECRAFT_VERSION=1.20.1
 ```
