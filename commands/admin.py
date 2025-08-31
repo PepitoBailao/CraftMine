@@ -1,9 +1,9 @@
 from discord.ext import commands
 
-def is_admin(admin_ids):
+def is_admin(config):
     """Décorateur pour vérifier si l'utilisateur est admin"""
     def predicate(ctx):
-        return ctx.author.id in admin_ids
+        return ctx.author.id in config.admin_ids
     return commands.check(predicate)
 
 class AdminCommands(commands.Cog):
@@ -12,9 +12,13 @@ class AdminCommands(commands.Cog):
         self.config = config
     
     @commands.group(name="parametres", invoke_without_command=True)
-    @is_admin(admin_ids=[448420884059914240])  # Utiliser la config plus tard
     async def parametres(self, ctx):
         """Affiche les paramètres actuels"""
+        # Vérification des permissions
+        if ctx.author.id not in self.config.admin_ids:
+            await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
+            return
+            
         embed_content = (
             f"**Configuration actuelle :**\n"
             f"• **IP :** `{self.config.get('server_ip')}`\n"
@@ -29,31 +33,43 @@ class AdminCommands(commands.Cog):
         await ctx.send(embed_content)
     
     @parametres.command(name="setip")
-    @is_admin(admin_ids=[448420884059914240])
     async def set_ip(self, ctx, ip: str, port: int = 25565):
         """Changer l'IP et le port du serveur"""
+        if ctx.author.id not in self.config.admin_ids:
+            await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
+            return
+            
         self.config.set("server_ip", ip)
         self.config.set("server_port", port)
         await ctx.send(f"Adresse mise à jour : `{ip}:{port}`")
     
     @parametres.command(name="setversion")
-    @is_admin(admin_ids=[448420884059914240])
     async def set_version(self, ctx, version: str):
         """Changer la version affichée"""
+        if ctx.author.id not in self.config.admin_ids:
+            await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
+            return
+            
         self.config.set("minecraft_version", version)
         await ctx.send(f"Version Minecraft mise à jour : `{version}`")
     
     @parametres.command(name="reload")
-    @is_admin(admin_ids=[448420884059914240])
     async def reload_config(self, ctx):
         """Recharge la configuration depuis le fichier"""
+        if ctx.author.id not in self.config.admin_ids:
+            await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
+            return
+            
         self.config.load_config()
         await ctx.send("Configuration rechargée depuis le fichier.")
     
     @parametres.command(name="test")
-    @is_admin(admin_ids=[448420884059914240])
     async def test_connection(self, ctx):
         """Teste la connexion au serveur Minecraft"""
+        if ctx.author.id not in self.config.admin_ids:
+            await ctx.send("Vous n'avez pas la permission d'utiliser cette commande.")
+            return
+            
         from src.utils.minecraft import MinecraftServerManager
         
         minecraft_manager = MinecraftServerManager(self.config)

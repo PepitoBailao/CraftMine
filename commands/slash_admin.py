@@ -11,7 +11,7 @@ class SlashAdminCommands(commands.Cog):
     
     def is_admin(self, user_id: int) -> bool:
         """Vérifie si l'utilisateur est admin"""
-        return user_id in [448420884059914240]  # Remplacez par vos IDs admin
+        return user_id in self.config.admin_ids
     
     @app_commands.command(name="parametres", description="Configuration du bot (admin uniquement)")
     @app_commands.describe(
