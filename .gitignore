@@ -39,11 +39,19 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# Project specific
+# Project specific - SECURITE
 config.json
 *.log
+secrets.json
+.secrets
+local_config.py
 
 # Hosting specific
 .railway
 .vercel
 .netlify
+
+# Backup files
+*.bak
+*.backup
+*~

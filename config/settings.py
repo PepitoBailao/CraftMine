@@ -8,14 +8,14 @@ load_dotenv()
 class Config:
     def __init__(self, config_file="config.json"):
         self.config_file = config_file
-        self.admin_ids = [448420884059914240]
+        self.admin_ids = [int(os.getenv("ADMIN_USER_ID", "0"))]  # À configurer dans .env
         self.token = os.getenv("DISCORD_TOKEN")
         
         # Valeurs par défaut depuis les variables d'environnement
         self.defaults = {
-            "server_ip": os.getenv("DEFAULT_SERVER_IP", "144.24.205.125"),
+            "server_ip": os.getenv("DEFAULT_SERVER_IP", "localhost"),
             "server_port": int(os.getenv("DEFAULT_SERVER_PORT", "25565")),
-            "minecraft_version": os.getenv("DEFAULT_MINECRAFT_VERSION", "1.24.1")
+            "minecraft_version": os.getenv("DEFAULT_MINECRAFT_VERSION", "1.20.1")
         }
         
         self.load_config()
