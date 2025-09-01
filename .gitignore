@@ -1,4 +1,9 @@
-# Python
+# 🔒 FICHIERS SENSIBLES À NE JAMAIS PUBLIER
+.env
+config.json
+SENSITIVE_INFO_CACHE.md
+
+# 📁 FICHIERS TEMPORAIRES ET CACHE
 __pycache__/
 *.py[cod]
 *$py.class
@@ -19,39 +24,66 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# IDEs
+# 🔧 CONFIGURATION IDE/ÉDITEUR
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# OS
+# 🖥️ SYSTÈME D'EXPLOITATION
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Project specific - SECURITE
-config.json
+# 📝 LOGS ET DONNÉES TEMPORAIRES
 *.log
-secrets.json
-.secrets
-local_config.py
+logs/
+*.pid
+*.seed
+*.pid.lock
+.npm
 
-# Hosting specific
-.railway
-.vercel
-.netlify
+# 🧪 TESTS ET COUVERTURE
+.coverage
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
 
-# Backup files
-*.bak
+# 🌐 ENVIRONNEMENTS VIRTUELS
+.venv/
+venv/
+ENV/
+env/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 📦 DÉPENDANCES
+node_modules/
+.pnp
+.pnp.js
+
+# 🗄️ BASES DE DONNÉES LOCALES
+*.db
+*.sqlite
+*.sqlite3
+
+# 🔐 CERTIFICATS ET CLÉS
+*.pem
+*.key
+*.crt
+*.csr
+
+# 📊 DONNÉES UTILISATEUR
+user_data/
+backups/
 *.backup
-*~

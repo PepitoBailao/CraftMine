@@ -8,7 +8,15 @@ load_dotenv()
 class Config:
     def __init__(self, config_file="config.json"):
         self.config_file = config_file
-        self.admin_ids = [int(os.getenv("ADMIN_USER_ID", "0"))]  # À configurer dans .env
+        
+        # Gestion sécurisée de l'ID admin
+        admin_id_str = os.getenv("ADMIN_USER_ID", "0")
+        try:
+            self.admin_ids = [int(admin_id_str)] if admin_id_str.isdigit() else [0]
+        except ValueError:
+            print(f"⚠️  ADMIN_USER_ID invalide dans .env: '{admin_id_str}' - utilisez un ID numérique Discord")
+            self.admin_ids = [0]
+        
         self.token = os.getenv("DISCORD_TOKEN")
         
         # Valeurs par défaut depuis les variables d'environnement

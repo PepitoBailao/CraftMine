@@ -1,5 +1,11 @@
 {
-    "server_ip": "votre_ip_serveur_minecraft",
+    "server_ip": "your_minecraft_server_ip",
     "server_port": 25565,
-    "minecraft_version": "1.20.1"
+    "minecraft_version": "1.21.4",
+    "command_prefix": "!",
+    "admin_ids": [0],
+    "update_interval": 30,
+    "mods_folder_path": "~/mods",
+    "google_drive_mods_link": "https://drive.google.com/drive/folders/your_folder_id",
+    "server_open": true
 }

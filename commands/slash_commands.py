@@ -41,6 +41,65 @@ class SlashCommands(commands.Cog):
         message = self.minecraft_manager.format_players_message(players_data)
         await interaction.followup.send(message)
     
+    @app_commands.command(name="mods", description="Affiche le lien pour télécharger tous les mods du serveur")
+    async def mods(self, interaction: discord.Interaction):
+        """Slash command pour accéder aux mods du serveur"""
+        embed = discord.Embed(
+            title="Mods du serveur CraftMine",
+            description="Plus de 80 mods Fabric pour Minecraft 1.21.4",
+            color=discord.Color.green()
+        )
+        
+        embed.add_field(
+            name="Téléchargement",
+            value="Cliquez sur le bouton ci-dessous pour télécharger tous les mods nécessaires",
+            inline=False
+        )
+        
+        # Bouton vers le Google Drive (lien configurable)
+        drive_link = self.config.get("google_drive_mods_link", "https://drive.google.com/")
+        view = discord.ui.View()
+        button = discord.ui.Button(
+            label="Télécharger tous les mods",
+            url=drive_link,
+            style=discord.ButtonStyle.link
+        )
+        view.add_item(button)
+        
+        await interaction.response.send_message(embed=embed, view=view)
+    
+    @app_commands.command(name="chercher-mod", description="Cherche un mod sur Modrinth et CurseForge")
+    @app_commands.describe(nom_mod="Le nom du mod à rechercher")
+    async def chercher_mod(self, interaction: discord.Interaction, nom_mod: str):
+        """Slash command pour chercher un mod spécifique"""
+        await interaction.response.defer()
+        
+        # Nettoyer le nom du mod
+        clean_name = nom_mod.lower().replace(' ', '-').replace('_', '-')
+        
+        embed = discord.Embed(
+            title=f"Recherche: {nom_mod}",
+            description=f"Liens de téléchargement pour **{nom_mod}**",
+            color=discord.Color.blue()
+        )
+        
+        # Liens de recherche
+        modrinth_search = f"https://modrinth.com/mods?q={nom_mod.replace(' ', '%20')}"
+        curseforge_search = f"https://www.curseforge.com/minecraft/search?search={nom_mod.replace(' ', '%20')}"
+        
+        embed.add_field(
+            name="Recherche",
+            value=(
+                f"[Modrinth]({modrinth_search})\n"
+                f"[CurseForge]({curseforge_search})"
+            ),
+            inline=False
+        )
+        
+        embed.set_footer(text="Recherchez directement sur les plateformes de mods")
+        
+        await interaction.followup.send(embed=embed)
+    
     @app_commands.command(name="aide", description="Affiche l'aide des commandes disponibles")
     async def aide(self, interaction: discord.Interaction):
         """Slash command pour l'aide"""
@@ -51,7 +110,7 @@ class SlashCommands(commands.Cog):
         
         embed.add_field(
             name="Surveillance du serveur",
-            value="• `/status` - État du serveur et nombre de joueurs\n• `/joueurs` - Liste des joueurs connectés",
+            value="• `/status` - État du serveur et nombre de joueurs\n• `/joueurs` - Liste des joueurs connectés\n• `/mods` - Liste des mods/plugins installés\n• `/chercher-mod` - Rechercher un mod spécifique",
             inline=False
         )
         

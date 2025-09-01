@@ -51,9 +51,17 @@ class SlashAdminCommands(commands.Cog):
             embed.add_field(name="Port", value=f"`{self.config.get('server_port')}`", inline=True)
             embed.add_field(name="Version", value=f"`{self.config.get('minecraft_version')}`", inline=True)
             
+            # Nouveaux paramètres
+            embed.add_field(name="Serveur ouvert", value=f"`{'Oui' if self.config.get('server_open', True) else 'Non'}`", inline=True)
+            
+            drive_link = self.config.get('google_drive_mods_link', 'Non configuré')
+            if len(drive_link) > 50:
+                drive_link = drive_link[:47] + "..."
+            embed.add_field(name="Lien Google Drive", value=f"`{drive_link}`", inline=False)
+            
             embed.add_field(
                 name="Actions disponibles",
-                value="Utilisez `/parametres` avec les différentes actions pour modifier la configuration",
+                value="Utilisez `/parametres` avec les différentes actions pour modifier la configuration\nUtilisez `/config` pour gérer serveur_ouvert et lien_drive",
                 inline=False
             )
             
@@ -104,6 +112,44 @@ class SlashAdminCommands(commands.Cog):
                 embed.add_field(name="Solution", value="Vérifiez l'IP et le port dans la configuration", inline=False)
             
             await interaction.followup.send(embed=embed)
+
+    @app_commands.command(name="config", description="Gère les paramètres avancés du bot (admin uniquement)")
+    @app_commands.describe(
+        parametre="Paramètre à modifier",
+        valeur="Nouvelle valeur"
+    )
+    @app_commands.choices(parametre=[
+        app_commands.Choice(name="serveur_ouvert", value="server_open"),
+        app_commands.Choice(name="lien_drive_mods", value="google_drive_mods_link")
+    ])
+    async def config_command(self, interaction: discord.Interaction, parametre: str, valeur: Optional[str] = None):
+        """Commande pour gérer les paramètres avancés"""
+        
+        # Vérification des permissions
+        if not self.is_admin(interaction.user.id):
+            await interaction.response.send_message("Vous n'avez pas la permission d'utiliser cette commande.", ephemeral=True)
+            return
+        
+        if valeur is None:
+            # Afficher la valeur actuelle
+            current_value = self.config.get(parametre)
+            if parametre == "server_open":
+                display_value = "Oui" if current_value else "Non"
+            else:
+                display_value = current_value if current_value else "Non configuré"
+            
+            await interaction.response.send_message(f"Valeur actuelle de `{parametre}`: `{display_value}`", ephemeral=True)
+            return
+        
+        # Modifier la configuration
+        if parametre == "server_open":
+            new_value = valeur.lower() in ['true', '1', 'oui', 'ouvert', 'on', 'yes']
+            self.config.set("server_open", new_value)
+            await interaction.response.send_message(f"Serveur configuré comme: `{'Ouvert' if new_value else 'Fermé'}`", ephemeral=True)
+            
+        elif parametre == "google_drive_mods_link":
+            self.config.set("google_drive_mods_link", valeur)
+            await interaction.response.send_message(f"Lien Google Drive mis à jour", ephemeral=True)
 
 async def setup(bot, config):
     """Fonction pour ajouter les slash commands admin au bot"""
